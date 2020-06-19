@@ -31,23 +31,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textTitulo">
 
         <RadioButton
+            android:id="@+id/primeiraQuestao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Primeira questão" />
 
         <RadioButton
+            android:id="@+id/segundaQuestao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:text="Segunda questão" />
 
         <RadioButton
+            android:id="@+id/terceiraQuestao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:text="Terceira questão" />
 
         <RadioButton
+            android:id="@+id/quartaQuestao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
@@ -57,32 +61,32 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonResponder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:background="@drawable/degrade_fundo"
-        android:text="Button"
+        android:text="@string/responder"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonVoltar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:background="@drawable/degrade_fundo"
-        android:text="Voltar"
+        android:text="@string/voltar"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/divider"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonPular"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
@@ -91,7 +95,7 @@
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button3"
+        app:layout_constraintStart_toEndOf="@+id/buttonVoltar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
@@ -105,7 +109,7 @@
         android:background="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonPular" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
