@@ -8,6 +8,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.aplha.quizteste.bancodedados.PacoteDeQuestoes;
+import com.aplha.quizteste.bancodedados.QuestoesDAO;
+import com.aplha.quizteste.modelos.Questao;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView textTitulo;
@@ -31,8 +37,12 @@ public class MainActivity extends AppCompatActivity {
         buttonResponder = findViewById(R.id.buttonResponder);
         buttonVoltar    = findViewById(R.id.buttonVoltar);
 
+        ArrayList<Questao> arrayDeQuestao = PacoteDeQuestoes.simuladoUm();
 
-
+        for (Questao questao: arrayDeQuestao){
+            QuestoesDAO questoesDAO = new QuestoesDAO(getApplicationContext());
+            questoesDAO.salvarQuestoes(questao);
+        }
 
     }
 }
