@@ -6,27 +6,19 @@ public class Questao implements Serializable {
     // pergunta TEXT, resp1 TEXT, resp2 TEXT, resp3 TEXT, resp4 TEXT, " +
     //                 " gabarito INT(1)
     private String pergunta, resp1, resp2, resp3, resp4;
-    private int gabarito, id;
+    private int gabarito;
 
     public Questao() {
     }
 
-    public Questao(int id, String pergunta, String resp1, String resp2, String resp3, String resp4, int gabarito) {
-        this.id = id;
+    public Questao( String pergunta, String resp1, String resp2, String resp3, String resp4, int gabarito) {
+
         this.pergunta = pergunta;
         this.resp1 = resp1;
         this.resp2 = resp2;
         this.resp3 = resp3;
         this.resp4 = resp4;
         this.gabarito = gabarito;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getPergunta() {
