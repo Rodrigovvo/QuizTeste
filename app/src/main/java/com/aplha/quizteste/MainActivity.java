@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean respondida;
     private int totalDeQuestoes, numeroDaQuestao;
     private int gabarito;
+    private int corretas, erradas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         buttonPular     = findViewById(R.id.buttonPular);
         buttonResponder = findViewById(R.id.buttonResponder);
         buttonVoltar    = findViewById(R.id.buttonVoltar);
+
+        corretas = 0;
+        erradas = 0;
 
 
 
@@ -103,9 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         }else{
-
-               finish();
-            // telaDeResultado();
+            telaResultado();
+            finish();
         }
     }
 
@@ -134,8 +138,10 @@ public class MainActivity extends AppCompatActivity {
             if (gabarito == resposta){
                 radioEscolhida.setTextColor(getResources().getColor(R.color.colorAccent));
                 buttonResponder.setText("Próxima Questão");
+                corretas++;
             }else{
                 buttonResponder.setText("Próxima Questão");
+                erradas++;
                 switch (resposta) {
                     case 1:
                         primeiraQuestao.setTextColor(getResources().getColor(R.color.respostaErrada));
@@ -174,5 +180,16 @@ public class MainActivity extends AppCompatActivity {
         terceiraQuestao.setTextColor(getResources().getColor(R.color.textoQuestoes));
         quartaQuestao.setTextColor(getResources().getColor(R.color.textoQuestoes));
 
+    }
+
+    public void telaResultado(){
+        Intent intent = new Intent (MainActivity.this, ResultadoActivity.class);
+        String e = Integer.toString(erradas);
+        String c = Integer.toString(corretas);
+        intent.putExtra("erradas", e);
+        intent.putExtra("corretas", c);
+        Log.i("Intent: ", " corretas " + corretas + " erradas " +erradas);
+
+        startActivity(intent);
     }
 }
