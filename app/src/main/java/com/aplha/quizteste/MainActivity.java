@@ -76,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
             questaoList = perguntasDB.listar();
             totalDeQuestoes = questaoList.size();
 
+        buttonPular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                proximaQuestao();
+            }
+        });
             //Collections.shuffle(questaoList);  -- Deixar a lista no aleatório
         proximaQuestao();
 
@@ -83,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 buttonResponder.setText("Responder");
+
                 if(!respondida) {
                     if (primeiraQuestao.isChecked() || segundaQuestao.isChecked() || terceiraQuestao.isChecked() || quartaQuestao.isChecked()) {
                         respondida = true;
