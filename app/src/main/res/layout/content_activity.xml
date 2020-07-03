@@ -36,28 +36,32 @@
             android:id="@+id/primeiraQuestao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Primeira questão" />
+            android:text="Primeira questão"
+            android:textSize="15sp" />
 
         <RadioButton
             android:id="@+id/segundaQuestao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
-            android:text="Segunda questão" />
+            android:text="Segunda questão"
+            android:textSize="15sp" />
 
         <RadioButton
             android:id="@+id/terceiraQuestao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
-            android:text="Terceira questão" />
+            android:text="Terceira questão"
+            android:textSize="15sp" />
 
         <RadioButton
             android:id="@+id/quartaQuestao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
-            android:text="Quarta questão" />
+            android:text="Quarta questão"
+            android:textSize="15sp" />
 
 
     </RadioGroup>
@@ -69,22 +73,24 @@
         android:layout_marginTop="100dp"
         android:background="@drawable/degrade_fundo"
         android:text="@string/responder"
+        android:textSize="15sp"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         android:elevation="2dp"/>
 
-    <Button
-        android:id="@+id/buttonVoltar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+    <TextView
+        android:id="@+id/Cronometro"
+        android:layout_width="195dp"
+        android:layout_height="48dp"
         android:background="@drawable/degrade_fundo"
-        android:text="@string/voltar"
+        android:foregroundGravity="left|bottom"
+        android:gravity="center"
+        android:text="00:00"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
-        app:layout_constraintEnd_toStartOf="@+id/buttonPular"
+        android:textSize="18sp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,13 +98,12 @@
         android:id="@+id/buttonPular"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:background="@drawable/degrade_fundo"
         android:text="Pular"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonVoltar"
+        app:layout_constraintStart_toEndOf="@+id/Cronometro"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
@@ -107,10 +112,11 @@
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="5dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonPular" />
 

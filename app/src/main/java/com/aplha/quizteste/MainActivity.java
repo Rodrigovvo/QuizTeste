@@ -1,14 +1,19 @@
 
 package com.aplha.quizteste;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -17,17 +22,20 @@ import android.widget.Toast;
 import com.aplha.quizteste.bancodedados.PerguntasDB;
 import com.aplha.quizteste.modelos.Questao;
 
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.CountDownLatch;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textTitulo;
+    private static final long START_TIME_IN_MILLIS = 1800000;
+    private TextView textTitulo, cronometro;
     private RadioGroup radioGroup;
     private RadioButton primeiraQuestao, segundaQuestao, terceiraQuestao, quartaQuestao;
-    private Button buttonResponder, buttonVoltar, buttonPular;
-
+    private Button buttonResponder, buttonPular;
 
     private List <Questao> questaoList;
     private Questao questaoAtual;
@@ -36,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
     private int gabarito;
     private int corretas, erradas;
 
+    private CountDownTimer countDownTimer;
+    long tempoPassadoEmMillis;
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +62,13 @@ public class MainActivity extends AppCompatActivity {
         quartaQuestao   = findViewById(R.id.quartaQuestao);
         buttonPular     = findViewById(R.id.buttonPular);
         buttonResponder = findViewById(R.id.buttonResponder);
-        buttonVoltar    = findViewById(R.id.buttonVoltar);
+        cronometro     = findViewById(R.id.Cronometro);
+        tempoPassadoEmMillis = START_TIME_IN_MILLIS;
+
+        iniciarCronometro();
 
         corretas = 0;
         erradas = 0;
-
-
 
 
             PerguntasDB perguntasDB = new PerguntasDB(this);
@@ -63,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
             totalDeQuestoes = questaoList.size();
 
             //Collections.shuffle(questaoList);  -- Deixar a lista no aleatório
-
-
         proximaQuestao();
 
         buttonResponder.setOnClickListener(new View.OnClickListener() {
@@ -76,19 +88,17 @@ public class MainActivity extends AppCompatActivity {
                         respondida = true;
                         buttonResponder.setEnabled(true);
 
-
                         mostrarCorreta();
+
                     } else {
                         Toast.makeText(MainActivity.this, "Selecione uma opção", Toast.LENGTH_SHORT).show();
                         respondida = false;
-
                     }
                 }else{
                     proximaQuestao();
                 }
             }
         });
-
     }
 
     public void proximaQuestao(){
@@ -106,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
             numeroDaQuestao++;
             respondida = false;
 
-
         }else{
             telaResultado();
             finish();
@@ -121,20 +130,16 @@ public class MainActivity extends AppCompatActivity {
 
             if(radioEscolhida == primeiraQuestao){
                 resposta = 1;
-
             }
             if(radioEscolhida == segundaQuestao){
                 resposta = 2;
-
-             }
+            }
             if(radioEscolhida == terceiraQuestao){
                 resposta = 3;
-
-               }
+            }
            if(radioEscolhida == quartaQuestao){
                resposta = 4;
-
-              }
+           }
             if (gabarito == resposta){
                 radioEscolhida.setTextColor(getResources().getColor(R.color.colorAccent));
                 buttonResponder.setText("Próxima Questão");
@@ -169,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
                         case 4:
                             quartaQuestao.setTextColor(getResources().getColor(R.color.colorAccent));
                             break;
-
                 }
             }
     }
@@ -179,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
         segundaQuestao.setTextColor(getResources().getColor(R.color.textoQuestoes));
         terceiraQuestao.setTextColor(getResources().getColor(R.color.textoQuestoes));
         quartaQuestao.setTextColor(getResources().getColor(R.color.textoQuestoes));
-
     }
 
     public void telaResultado(){
@@ -188,8 +191,31 @@ public class MainActivity extends AppCompatActivity {
         String c = Integer.toString(corretas);
         intent.putExtra("erradas", e);
         intent.putExtra("corretas", c);
-        Log.i("Intent: ", " corretas " + corretas + " erradas " +erradas);
+        Log.i("Intent: ", " corretas " + corretas + " erradas " + erradas);
 
         startActivity(intent);
+    }
+
+    private void iniciarCronometro(){
+        countDownTimer = new CountDownTimer(tempoPassadoEmMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tempoPassadoEmMillis = millisUntilFinished;
+                updateCronometro();
+            }
+
+            @Override
+            public void onFinish() {
+                telaResultado();
+                finish();
+            }
+        }.start();
+    }
+
+    private void updateCronometro(){
+        int minutos= (int) (tempoPassadoEmMillis / 1000) / 60;
+        int segundos= (int) (tempoPassadoEmMillis / 1000) % 60;
+        String tempo_do_contador = String.format(Locale.getDefault(),"%02d:%02d",  minutos, segundos);
+        cronometro.setText(tempo_do_contador);
     }
 }
