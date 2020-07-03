@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private int gabarito;
     private int corretas, erradas;
 
-    private CountDownTimer countDownTimer;
     long tempoPassadoEmMillis;
 
 
