@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QuizTeste</string>
+    <string name="app_name">DETRAN MG</string>
     <string name="titulo">Titulo</string>
     <string name="responder">Responder</string>
     <string name="voltar">Voltar</string>
@@ -15,4 +15,5 @@
     <string name="quest_es">Questões :</string>
     <string name="certas">Certas :</string>
     <string name="_30_quest_es">30 Questões</string>
+    <string name="pulou">Pulou :</string>
 </resources>

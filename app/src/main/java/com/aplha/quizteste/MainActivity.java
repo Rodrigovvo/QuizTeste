@@ -42,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean respondida;
     private int totalDeQuestoes, numeroDaQuestao;
     private int gabarito;
-    private int corretas, erradas;
+    private int corretas, erradas, puladas;
 
+    private CountDownTimer countDownTimer;
     long tempoPassadoEmMillis;
 
 
@@ -68,41 +69,47 @@ public class MainActivity extends AppCompatActivity {
 
         corretas = 0;
         erradas = 0;
+        puladas = 0;
 
 
             PerguntasDB perguntasDB = new PerguntasDB(this);
 
             questaoList = perguntasDB.listar();
-            totalDeQuestoes = questaoList.size();
+            Collections.shuffle(questaoList);  // Deixar a lista no aleatório
+            totalDeQuestoes = 30;
+
 
         buttonPular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                puladas = puladas + 1;
                 proximaQuestao();
             }
         });
-            //Collections.shuffle(questaoList);  -- Deixar a lista no aleatório
+
         proximaQuestao();
+
 
         buttonResponder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 buttonResponder.setText("Responder");
 
-                if(!respondida) {
-                    if (primeiraQuestao.isChecked() || segundaQuestao.isChecked() || terceiraQuestao.isChecked() || quartaQuestao.isChecked()) {
-                        respondida = true;
-                        buttonResponder.setEnabled(true);
+                    if (!respondida) {
+                        if (primeiraQuestao.isChecked() || segundaQuestao.isChecked() || terceiraQuestao.isChecked() || quartaQuestao.isChecked()) {
+                            respondida = true;
+                            buttonResponder.setEnabled(true);
 
-                        mostrarCorreta();
+                            mostrarCorreta();
 
+                        } else {
+                            Toast.makeText(MainActivity.this, "Selecione uma opção", Toast.LENGTH_SHORT).show();
+                            respondida = false;
+                        }
                     } else {
-                        Toast.makeText(MainActivity.this, "Selecione uma opção", Toast.LENGTH_SHORT).show();
-                        respondida = false;
+                        proximaQuestao();
                     }
-                }else{
-                    proximaQuestao();
-                }
+                //
             }
         });
     }
@@ -195,8 +202,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent (MainActivity.this, ResultadoActivity.class);
         String e = Integer.toString(erradas);
         String c = Integer.toString(corretas);
+        String p = Integer.toString(puladas);
         intent.putExtra("erradas", e);
         intent.putExtra("corretas", c);
+        intent.putExtra("puladas", p);
         Log.i("Intent: ", " corretas " + corretas + " erradas " + erradas);
 
         startActivity(intent);
