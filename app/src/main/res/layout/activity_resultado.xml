@@ -7,11 +7,39 @@
     tools:context=".ResultadoActivity">
 
     <TextView
+        android:id="@+id/textView7"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/pulou"
+        android:textColor="@color/textoQuestoes"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/textPulou"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:paddingLeft="10dp"
+        android:text="2"
+        android:textColor="@color/respostaErrada"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/textErradas" />
+
+    <TextView
         android:id="@+id/textErradas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/allerta_stencil"
+        android:fontFamily="sans-serif-medium"
         android:paddingLeft="10dp"
         android:text="2"
         android:textColor="@color/respostaErrada"
@@ -26,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/allerta_stencil"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/erradas"
         android:textColor="@color/textoQuestoes"
         android:textSize="18sp"
@@ -83,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/allerta_stencil"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/certas"
         android:textColor="@color/textoQuestoes"
         android:textSize="18sp"
@@ -110,7 +138,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/allerta_stencil"
+        android:fontFamily="sans-serif-medium"
         android:paddingLeft="10dp"
         android:text="1"
         android:textColor="@color/colorPrimary"

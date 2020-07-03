@@ -13,8 +13,8 @@ import android.widget.TextView;
 public class ResultadoActivity extends AppCompatActivity {
 
     Button botaoRetorno;
-    TextView textErradas, textCorretas;
-    String erradas, corretas;
+    TextView textErradas, textCorretas, textPulou;
+    String erradas, corretas, puladas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +24,21 @@ public class ResultadoActivity extends AppCompatActivity {
         botaoRetorno = findViewById(R.id.botaoRetorno);
         textCorretas = findViewById(R.id.textCorretas);
         textErradas = findViewById(R.id.textErradas);
+        textPulou   = findViewById(R.id.textPulou);
 
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             erradas = bundle.getString("erradas");
             corretas = bundle.getString("corretas");
+            puladas = bundle.getString("puladas");
         }
 
         Log.i("Bundle: ", " corretas " + corretas + " erradas " +erradas);
 
         textErradas.setText(erradas);
         textCorretas.setText(corretas);
+        textPulou.setText(puladas);
 
         botaoRetorno.setOnClickListener(new View.OnClickListener() {
             @Override
